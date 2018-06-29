@@ -1,18 +1,23 @@
 package com.example.employee.restfulapi.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 public class Employee {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private Integer age;
     private String gender;
     private Integer salary;
+    @JsonIgnore
     private Long companyId;
 
     public Employee() {
@@ -24,6 +29,10 @@ public class Employee {
         this.gender = gender;
         this.salary = salary;
         this.companyId = companyId;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getCompanyId() {
@@ -42,7 +51,7 @@ public class Employee {
         this.salary = salary;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -71,4 +80,7 @@ public class Employee {
     public void setGender(String gender) {
         this.gender = gender;
     }
+
+
+
 }
